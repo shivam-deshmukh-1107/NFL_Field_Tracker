@@ -1,0 +1,60 @@
+{
+  "game": "NFL Blitz (Midway, 1997, arcade)",
+  "units": "yards",
+  "status": "length axis measured; width axis unresolved",
+  "measured": {
+    "field_length_between_goal_lines_yd": 100,
+    "yard_line_spacing_yd": 5,
+    "tick_mark_spacing_yd": 1,
+    "first_down_distance_yd": 30
+  },
+  "unresolved": {
+    "field_width_yd": null,
+    "hash_inset_yd": null,
+    "end_zone_depth_yd": null,
+    "reason": "Width requires focal length. Blitz uses a low, near-ground camera: the cross-field vanishing point sits ~200 image widths from centre while the down-field one sits at ~0.6, so the two are near-perpendicular from the principal point and f is not observable. 0 of 20 sampled frames had both vanishing points at usable distance."
+  },
+  "evidence": {
+    "yard_scale": {
+      "method": "lattice fit vs HUD down-and-distance (independent ground truth)",
+      "clip2": {
+        "hud_truth_yd": "30->31",
+        "measured_yd": 30.01,
+        "iqr_yd": 0.93
+      },
+      "clip4": {
+        "hud_truth_yd": 29,
+        "measured_yd": 29.11,
+        "iqr_yd": 0.35
+      },
+      "clip3": {
+        "hud_truth_yd": 29,
+        "measured_yd": 31.17,
+        "iqr_yd": 4.34,
+        "note": "tight pre-snap view; coloured lines partly off-frame"
+      }
+    },
+    "field_length": {
+      "method": "HUD 'ON THE N' read by auto-decoded bitmap font; digits labelled by geometric distance measurement, no manual annotation",
+      "videos": [
+        5,
+        6,
+        7
+      ],
+      "readings": 1814,
+      "unreadable": 9,
+      "digits_labelled": "10/10",
+      "observed_range_yd": [
+        2,
+        50
+      ],
+      "ceiling": "hard stop at 50 across 1814 readings; no value >50 observed",
+      "inference": "N counts from nearer goal line and meets at midfield => length = 2*50"
+    }
+  },
+  "caveats": [
+    "Video 7 (anisotropically stretched upload) contributed only 79 of 4883 text lines.",
+    "Length rests on the football convention that 'ON THE N' counts from the nearer goal line; the hard ceiling at exactly 50 is the evidence for it.",
+    "End zone depth not measured: goal lines are visible in only ~9% of gameplay frames."
+  ]
+}
